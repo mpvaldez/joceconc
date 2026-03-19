@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Libre+Franklin:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes intro-sign-drop {
+	0% {
+		opacity: 0;
+		transform: translate3d(-50%, -42vh, 0) rotate(-10deg) scale(0.86);
+	}
+
+	12% {
+		opacity: 1;
+	}
+
+	62% {
+		opacity: 1;
+		transform: translate3d(-50%, -50%, 0) rotate(5deg) scale(1);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translate3d(-50%, -50%, 0) rotate(7deg) scale(1);
+	}
+}
+
+@keyframes intro-overlay-fade {
+	0% {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	100% {
+		opacity: 0;
+		visibility: hidden;
+	}
+}
+
+.intro-overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 60;
+	pointer-events: none;
+	background: linear-gradient(180deg, rgba(18, 18, 18, 0.98) 0%, rgba(8, 8, 8, 0.92) 100%);
+}
+
+.intro-overlay--hidden {
+	opacity: 0;
+	visibility: hidden;
+}
+
+.intro-sign {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: min(28vw, 168px);
+	filter: grayscale(1) drop-shadow(0 18px 30px rgba(0, 0, 0, 0.38));
+	animation: intro-sign-drop 1.4s cubic-bezier(0.18, 0.89, 0.22, 1) forwards;
+}
+
+.intro-overlay:not(.intro-overlay--hidden) {
+	animation: intro-overlay-fade 420ms ease 1.45s forwards;
+}
+
+@media (max-width: 640px) {
+	.intro-sign {
+		width: min(40vw, 148px);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.intro-overlay {
+		display: none;
+	}
+
+	.intro-sign {
+		animation: none;
+	}
+}
